@@ -2,7 +2,7 @@
 <view class="container">
 	<view>-全部归档-</view>
 	<view class="categories">
-		<navigator url="/pages/posts/index?id={{item._id}}" class="category" wx:for="{{archives}}" wx:for-item="item" wx:key="index">
+		<navigator url="/pages/posts/index?id={{item._id}}&name={{item.title}}" class="category" wx:for="{{archives}}" wx:for-item="item" wx:key="index">
 			<image class="bg" src="{{item.background}}"></image>
 			<view class="title">{{item.title}}</view>
 		</navigator>

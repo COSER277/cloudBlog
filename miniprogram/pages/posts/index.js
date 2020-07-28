@@ -5,28 +5,38 @@ Page({
    * 页面的初始数据
    */
   data: {
-    category: ""
+    category: "",
+    posts:[]
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log("归档" + options.id)
-    var that = this
-    db.collection('blog').where({
-      aid: options.id
-    }).get().then(res => {
-      console.log(res)
-      that.setData({
-        category: res.data
-      })
+    console.log("归档" + options.name)
+    var cate=options.name
+    var cid=options.id
+    this.setData({
+      category:cate
     })
-
+    var d=this.getArchivesOfPosts(cid)
+    // console.log(d)
+    this.setData({
+      posts:d
+    })
     // api.getArchivePosts(options.cid,(data)=>{
     //   console.log(data)
     //  })
   },
-
+  //es6语法
+  async getArchivesOfPosts(aid){
+    var that = this;
+    const  result=await db.collection('blog').where({
+      aid: aid
+    }).get()
+    this.setData({
+      posts:result.data
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
